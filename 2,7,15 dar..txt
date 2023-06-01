@@ -1,0 +1,193 @@
+SET 2
+
+1..
+x <- seq(-3, 3, 0.1)
+y <- sin(x)
+plot(x, y, type = "l", xlab = "x", ylab = "f(x)", main = "Plot of f(x) = sin(x)")
+
+2..
+p <- 0.2
+n <- 6
+prob <- sum(dbinom(4:n, size = n, prob = p))
+cat("The probability that four or more workers will suffer from the disease:", prob)
+
+3..
+gcd_recursive <- function(a, b) {
+ if (b == 0) {
+ return(a) # Base case: GCD is a when b is 0
+ } else {
+ return(gcd_recursive(b, a %% b)) # Recursive call with updated values
+ }
+}
+a <- as.integer(readline("Enter the first number: "))
+b <- as.integer(readline("Enter the second number: "))
+result <- gcd_recursive(a, b)
+cat("The GCD of", a, "and", b, "is", result)
+
+4..
+data <- matrix(c(2,10,2,5,8,4,5,8,7,5,6,4,1,2,4,9), ncol = 2, byrow = TRUE)
+initial_centroids <- matrix(c(2,10,5,8,1,2), ncol = 2, byrow = TRUE)
+kmeans_result <- kmeans(data, centers = initial_centroids)
+cluster_assignments <- kmeans_result$cluster
+final_centroids <- kmeans_result$centers
+cat("Cluster Assignments:")
+print(cluster_assignments)
+cat("\nFinal Centroids:")
+print(final_centroids)
+
+==================================================================================================================
+
+SET 7
+
+1..
+x=c(2,62,10,15)
+labels=c("london","new york","singapore","mumbai")
+pie(x,labels,col=c("red","green","blue","yellow"))
+
+2..
+library(stats)
+mean<-60
+standard_deviation<-4
+speed_threeshold<-68
+probability<-1-pnorm(speed_threeshold,mean,standard_deviation)
+print(probability)
+
+mean<-60
+standard_deviation<-4
+threeshold_speed<-55
+probability<-pnorm(threeshold_speed,mean,standard_deviation)
+print(probability)
+
+3...
+data(mtcars)
+model<-lm(mpg~.,data=mtcars)
+summary(model)
+
+4..
+generate_sequence <- function(n) {
+  sequence <- c(1)
+  i <- 1
+  
+  while (length(sequence) < n) {
+    i <- i + 1
+    
+    if (i %% 2 == 0 || i %% 3 == 0) {
+      sequence <- c(sequence, 0)
+    } else {
+      sequence <- c(sequence, i)
+    }
+  }
+  
+  return(sequence[1:n])
+}
+sequence <- generate_sequence(47)
+print(sequence)
+
+==================================================================================================================
+SET 15
+
+1...
+num <-as.integer(readline("enter a number:"))
+
+if(num%%2==0)
+{
+    cat(num," is an even number")
+}
+else{
+    cat(num," is an odd number")
+}
+
+2...
+matrix<-matrix(1:9,nrow=3,ncol=3)
+colomns_sums<-apply(matrix,2,sum)
+cat(colomns_sums)
+
+
+3...
+[a]
+Ozone <- c(41, 36, 12, 18, NA, 28)
+Solar.R <- c(190, 118, 149, 313, NA, NA)
+Wind <- c(7.4, 8, 12.6, 11.5, 14.3, 14.9)
+Temp <- c(67, 72, 74, 62, 56, 66)
+Month <- c(5, 5, 5, 5, 5, 5)
+Day <- c(1, 2, 3, 4, 5, 6)
+
+df <- data.frame(Ozone, Solar.R, Wind, Temp, Month, Day)
+df
+
+[b]
+ #Sort Solar.R column in descending order with NA values at the front
+v1 <- df$Solar.R[order(-is.na(df$Solar.R), -df$Solar.R)]
+
+
+[c]
+# Check missing values in Ozone column
+missing_Ozone <- sum(is.na(df$Ozone))
+print(paste("Missing values in Ozone column:", missing_Ozone))
+
+# Check missing values in each column
+missing_values <- sapply(df, function(x) sum(is.na(x)))
+print("Missing values in each column:")
+print(missing_values)
+
+
+[d]
+mean_Solar.R <- mean(na.omit(df$Solar.R))
+print(paste("Mean of Solar.R column (after removing missing values):", mean_Solar.R))
+
+
+[e]
+mean_Solar.R <- mean(df$Solar.R, na.rm = TRUE)
+df$Solar.R <- ifelse(is.na(df$Solar.R), mean_Solar.R, df$Solar.R)
+
+
+4...
+x <- c(0, 1, 3, 6, 8)
+y <- c(1, 3, 2, 5, 4)
+sqx<-x^2
+xy<-x*y
+df<-data.frame(x,y,xy,sqx)
+df
+reg<-lm(y~x)
+print(reg)
+
+
+1....
+
+[a]
+air <- data.frame(
+Ozone = c(41, 36, 12, 18, NA, 28),
+Solar.R = c(190, 118, 149, 313, NA, NA),
+Wind = c(7.4, 8, 12.6, 11.5, 14.3, 14.9),
+Temp = c(67, 72, 74, 62, 56, 66),
+Month = c(5, 5, 5, 5, 5, 5),
+Day = c(1, 2, 3, 4, 5, 6)
+)
+# Print the "air" data frame
+air
+
+[b]
+v1 <- sort(air$Solar.R, decreasing = TRUE, na.last = FALSE)
+# Print the vector "v1"
+v1
+
+
+[c]
+missing_values <- is.na(air$Ozone)
+# Print the number of missing values in each column
+colSums(is.na(air))
+
+
+[d]
+mean_solar_r <- mean(air$Solar.R, na.rm = TRUE)
+# Print the mean of the "Solar.R" column
+mean_solar_r
+
+
+[e]
+air$Solar.R[is.na(air$Solar.R)] <- mean(air$Solar.R, na.rm = TRUE)
+# Print the updated "air" data frame
+air
+
+
+
